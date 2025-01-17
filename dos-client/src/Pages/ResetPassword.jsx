@@ -6,7 +6,6 @@ import { ResetPasswordPost } from "../Api";
 export default function ResetPassword({ toast }) {
   const [password, setPassword] = useState("");
   const [confirmpassword,setConfirmPassword]=useState("");
-  const theme=localStorage.getItem("theme");
   const handleResetPassword = async (e) => {
     e.preventDefault();
     if (password === "") {
@@ -57,14 +56,14 @@ export default function ResetPassword({ toast }) {
     >
       <div
         style={{
-          padding: "2em",
+          padding: "5%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           width: "fit-content",
           borderRadius: "2em",
-          background: theme==="dark"?"rgb(208, 225, 253)":"rgb(17, 24, 39)",
+          boxShadow: "rgba(99, 99, 99, 0.4) 0px 5px 12px 0px"
         }}
       >
         <Logo />

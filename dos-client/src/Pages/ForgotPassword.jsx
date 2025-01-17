@@ -5,7 +5,6 @@ import { Button } from "primereact/button";
 import { ForgotPasswordPost} from "../Api";
 export default function ForgotPassword({ toast }) {
   const [email, setEmail] = useState("");
-  const theme = localStorage.getItem("theme");
   const handleSendMail = async (e) => {
     e.preventDefault();
     if (email === "") {
@@ -48,15 +47,14 @@ export default function ForgotPassword({ toast }) {
     >
       <div
         style={{
-          padding: "2em",
+          padding: "5%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           width: "fit-content",
           borderRadius: "2em",
-          background:
-            theme === "dark" ? "rgb(208, 225, 253)" : "rgb(17, 24, 39)",
+          boxShadow: "rgba(99, 99, 99, 0.4) 0px 5px 12px 0px"
         }}
       >
         <Logo />
@@ -70,6 +68,7 @@ export default function ForgotPassword({ toast }) {
             onChange={(e) => setEmail(e.target.value)}
             style={{ width: "275px"}}
             placeholder="Email"
+            keyfilter={"email"}
           />
           <br />
           <br />

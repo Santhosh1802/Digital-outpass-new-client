@@ -6,12 +6,11 @@ import { Button } from "primereact/button";
 import { LoginPost } from "../Api";
 import {useNavigate} from "react-router-dom";
 import { useDispatch} from "react-redux";
-import { setId, setUserType } from "../features/user/userSlice";
+import { setId, setUserType,setStoreEmail } from "../features/user/userSlice";
 export default function Login({ toast }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const theme = localStorage.getItem("theme");
   const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -44,6 +43,7 @@ export default function Login({ toast }) {
       if (res.error === "") {
         dispatch(setId(res.id));
         dispatch(setUserType(res.user_type));
+        dispatch(setStoreEmail(res.email))
         if (res.user_type === "admin") {
           navigate("/admindashboard");
         }
@@ -77,15 +77,14 @@ export default function Login({ toast }) {
     >
       <div
         style={{
-          padding: "2em",
+          padding: "5%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           width: "fit-content",
           borderRadius: "2em",
-          background:
-            theme === "dark" ? "rgb(208, 225, 253)" : "rgb(17, 24, 39)",
+          boxShadow: "rgba(99, 99, 99, 0.4) 0px 5px 12px 0px"
         }}
       >
         <Logo />
@@ -99,6 +98,7 @@ export default function Login({ toast }) {
             onChange={(e) => setEmail(e.target.value)}
             style={{ width: "275px" }}
             placeholder="Email"
+            keyfilter={"email"}
           />
           <br />
           <br />

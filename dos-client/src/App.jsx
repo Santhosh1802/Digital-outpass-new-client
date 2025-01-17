@@ -1,16 +1,21 @@
 import React, { useRef, useEffect, useState, lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toast } from "primereact/toast";
 import { ToggleButton } from "primereact/togglebutton";
 import { ProgressSpinner } from "primereact/progressspinner";
 import "./App.css";
 const Login = lazy(() => import("./Pages/Login"));
 const ForgotPassword = lazy(() => import("./Pages/ForgotPassword"));
-const ResetPassword=lazy(()=>import("./Pages/ResetPassword"));
-const AdminDashboard=lazy(()=>import("./Pages/AdminDashboard"));
-const SecurityDashboard=lazy(()=>import("./Pages/SecurityDashboard"));
-const WardenDashboard=lazy(()=>import("./Pages/WardenDashboard"));
-const StudentDashboard=lazy(()=>import("./Pages/StudentDashboard"));
+const ResetPassword = lazy(() => import("./Pages/ResetPassword"));
+const AdminDashboard = lazy(() => import("./Pages/AdminDashboard"));
+const SecurityDashboard = lazy(() => import("./Pages/SecurityDashboard"));
+const WardenDashboard = lazy(() => import("./Pages/WardenDashboard"));
+const StudentDashboard = lazy(() => import("./Pages/StudentDashboard"));
+const StudentProfile = lazy(() => import("./Pages/StudentProfile"));
+const StudentRequestOutpass = lazy(() =>import("./Pages/StudentRequestOutpass"));
+const StudentViewRequestStatus = lazy(() =>import("./Pages/StudentViewRequestStatus"));
+const StudentViewQR = lazy(() => import("./Pages/StudentViewQR"));
+const StudentFirstUpdate=lazy(()=>import("./Pages/StudentFirstUpdate"));
 export default function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const handleThemeChange = (e) => {
@@ -62,11 +67,25 @@ export default function App() {
               path="/forgotpassword"
               element={<ForgotPassword toast={toast} />}
             />
-            <Route path="/resetpassword" element={<ResetPassword toast={toast}/>}/>
-            <Route path="/admindashboard" element={<AdminDashboard/>}/>
-            <Route path="/studentdashboard" element={<StudentDashboard/>}/>
-            <Route path="/wardendashboard" element={<WardenDashboard/>}/>
-            <Route path="/securitydashboard" element={<SecurityDashboard/>}/>
+            <Route
+              path="/resetpassword"
+              element={<ResetPassword toast={toast} />}
+            />
+            <Route path="/admindashboard" element={<AdminDashboard />} />
+            <Route path="/studentdashboard" element={<StudentDashboard toast={toast}/>} />
+            <Route path="/wardendashboard" element={<WardenDashboard />} />
+            <Route path="/securitydashboard" element={<SecurityDashboard />} />
+            <Route path="/studentprofile" element={<StudentProfile />} />
+            <Route
+              path="/studentrequestoutpass"
+              element={<StudentRequestOutpass/>}
+            />
+            <Route
+              path="/studentviewrequeststatus"
+              element={<StudentViewRequestStatus/>}
+            />
+            <Route path="/studentviewqr" element={<StudentViewQR />} />
+            <Route path="/studentfirstupdate" element={<StudentFirstUpdate/>}/>
           </Routes>
         </Suspense>
       </BrowserRouter>

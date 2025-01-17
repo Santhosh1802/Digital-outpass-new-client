@@ -1,10 +1,10 @@
 import React from 'react'
-import NavBar from '../Components/NavBar'
+import NavBarWarden from '../Components/NavBarWarden'
 
 export default function WardenDashboard() {
   return (
     <div>
-      <NavBar/>
+      <NavBarWarden/>
     </div>
   )
 }
