@@ -68,24 +68,24 @@ export default function App() {
               element={<ForgotPassword toast={toast} />}
             />
             <Route
-              path="/resetpassword"
+              path="/account/auth/reset/:token"
               element={<ResetPassword toast={toast} />}
             />
             <Route path="/admindashboard" element={<AdminDashboard />} />
             <Route path="/studentdashboard" element={<StudentDashboard toast={toast}/>} />
             <Route path="/wardendashboard" element={<WardenDashboard />} />
             <Route path="/securitydashboard" element={<SecurityDashboard />} />
-            <Route path="/studentprofile" element={<StudentProfile />} />
+            <Route path="/studentprofile" element={<StudentProfile toast={toast} />} />
             <Route
               path="/studentrequestoutpass"
-              element={<StudentRequestOutpass/>}
+              element={<StudentRequestOutpass toast={toast}/>}
             />
             <Route
               path="/studentviewrequeststatus"
               element={<StudentViewRequestStatus/>}
             />
             <Route path="/studentviewqr" element={<StudentViewQR />} />
-            <Route path="/studentfirstupdate" element={<StudentFirstUpdate/>}/>
+            <Route path="/studentfirstupdate" element={<StudentFirstUpdate toast={toast}/>}/>
           </Routes>
         </Suspense>
       </BrowserRouter>

@@ -6,6 +6,7 @@ export const userSlice=createSlice({
         user_type:"",
         email:"",
         loggedIn:false,
+        token:"",
     },
     reducers:{
         setId:(state,action)=>{
@@ -18,14 +19,18 @@ export const userSlice=createSlice({
         setStoreEmail:(state,action)=>{
             state.email=action.payload;
         },
+        setStoreToken:(state,action)=>{
+            state.token=action.payload;
+        },
         logout:(state)=>{
             state.id="";
             state.user_type="";
             state.email="";
             state.loggedIn=false;
+            state.token="";
         }
     }
 })
 
-export const {setId,setUserType,setStoreEmail}=userSlice.actions
+export const {setId,setUserType,setStoreEmail,setStoreToken}=userSlice.actions
 export default userSlice.reducer

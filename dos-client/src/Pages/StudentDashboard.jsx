@@ -10,20 +10,22 @@ export default function StudentDashboard() {
   useEffect(() => {
     const fetchStudentInfo=async()=>{
       try {
+        if(id===undefined){
+          console.log("No id");
+        }
         const res=await GetStudentInfo(id);
-        console.log(res.data);
         
         if(res.data===""){
           navigate("/studentfirstupdate");
         }
       } catch (error) {
-        //console.log(error);
+        console.log(error);
         
       }
     }
     fetchStudentInfo();
-  }, [navigate,id]);
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
       <NavBarStudent />

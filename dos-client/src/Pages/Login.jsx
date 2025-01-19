@@ -1,17 +1,56 @@
-import React, { useState} from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState,useEffect } from "react";
 import Logo from "../Components/Logo";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 import { LoginPost } from "../Api";
-import {useNavigate} from "react-router-dom";
-import { useDispatch} from "react-redux";
-import { setId, setUserType,setStoreEmail } from "../features/user/userSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setId, setUserType, setStoreEmail,setStoreToken } from "../features/user/userSlice";
+import axios from "axios";
 export default function Login({ toast }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  async function TestSession() {
+    try {
+      const res = await axios.get(process.env.REACT_APP_LOGIN_API, {
+        withCredentials: true,
+      });
+      //console.log("Test",res.data);
+      
+      //console.log("Session Test Response:", res.data.result._id);
+  
+      if (res.data.status===201) {
+        dispatch(setId(res.data.result._id));
+        dispatch(setUserType(res.data.result.user_type));
+        dispatch(setStoreEmail(res.data.result.email));
+        dispatch(setStoreToken(res.data.result.token));
+  
+        if (res.data.result.user_type === "admin") {
+          navigate("/admindashboard");
+        }
+        if (res.data.result.user_type === "student") {
+          navigate("/studentdashboard");
+        }
+        if (res.data.result.user_type === "security") {
+          navigate("/securitydashboard");
+        }
+        if (res.data.result.user_type === "warden") {
+          navigate("/wardendashboard");
+        }
+      } else {
+        console.error("Invalid session:", res.data.message || "Unknown error");
+      }
+    } catch (err) {
+      //console.error("Session Test Error:", err.response?.data || err.message);
+    }
+  }
+  useEffect(() => {
+    TestSession();
+  }, []);
   const handleLogin = async (e) => {
     e.preventDefault();
     if (email === "") {
@@ -43,7 +82,8 @@ export default function Login({ toast }) {
       if (res.error === "") {
         dispatch(setId(res.id));
         dispatch(setUserType(res.user_type));
-        dispatch(setStoreEmail(res.email))
+        dispatch(setStoreEmail(res.email));
+        dispatch(setStoreToken(res.token));
         if (res.user_type === "admin") {
           navigate("/admindashboard");
         }
@@ -84,7 +124,7 @@ export default function Login({ toast }) {
           alignItems: "center",
           width: "fit-content",
           borderRadius: "2em",
-          boxShadow: "rgba(99, 99, 99, 0.4) 0px 5px 12px 0px"
+          boxShadow: "rgba(99, 99, 99, 0.4) 0px 5px 12px 0px",
         }}
       >
         <Logo />

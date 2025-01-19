@@ -3,7 +3,7 @@ import { Menubar } from "primereact/menubar";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { persistor } from "../store";
-//import axios from "axios";
+import axios from "axios";
 export default function NavBarStudent() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -12,9 +12,8 @@ export default function NavBarStudent() {
       dispatch({ type: "user/logout" });
       navigate("/");
     });
-    // const res=await axios.delete(process.env.REACT_APP_SESSION_LOGOUT);
-    // console.log(res.data.message);
-    
+      await axios.delete(process.env.REACT_APP_SESSION_LOGOUT,{withCredentials:true});
+      //console.log(res);
   };
   const items = [
     {
