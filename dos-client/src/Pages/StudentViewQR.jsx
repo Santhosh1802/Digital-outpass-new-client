@@ -33,21 +33,21 @@ export default function StudentViewQR() {
           display: "flex",
           flexDirection: "row",
           border: "1px solid black",
-          width: "370px",
-          height: "370px",
+          width: "360px",
+          height: "360px",
           marginTop: "2em",
         }}
       >
         <Image
           src={qr}
           alt=""
-          width="370px"
-          height="370px"
+          width="360px"
+          height="360px"
           preview
           style={{
             border: "px solid black",
-            width: "370px",
-            height: "370px",
+            width: "360px",
+            height: "360px",
           }}
         />
       </div>

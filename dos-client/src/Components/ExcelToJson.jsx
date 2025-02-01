@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import * as XLSX from "xlsx";
 import { FileUpload } from "primereact/fileupload";
+import { Button } from "primereact/button";
+import { Card } from "primereact/card";
+import { Dialog } from "primereact/dialog";
+import { AddStudent } from "../Api";
+
 const ExcelToJson = () => {
   const [jsonData, setJsonData] = useState([]);
+  const [file, setFile] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const fileUploadRef = useRef(null);
+
   const handleFileUpload = (event) => {
-    const file = event.files[0];
-    if (!file) return;
+    const uploadedFile = event.files[0];
+    if (!uploadedFile) return;
+
+    setFile(uploadedFile);
+
     const reader = new FileReader();
     reader.onload = (e) => {
       const data = new Uint8Array(e.target.result);
@@ -15,20 +27,76 @@ const ExcelToJson = () => {
       const parsedData = XLSX.utils.sheet_to_json(sheet);
       setJsonData(parsedData);
     };
-    console.log(jsonData);
-    reader.readAsArrayBuffer(file);
+    reader.readAsArrayBuffer(uploadedFile);
   };
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    if (!jsonData.length) {
+      setShowModal(true);
+      return;
+    }
+    console.log("Submitted Data:", jsonData);
+    const res=await AddStudent(jsonData);
+    console.log(res);
+    
+  };
+
+  const handleReset = () => {
+    setJsonData([]);
+    setFile(null);
+    if (fileUploadRef.current) {
+      fileUploadRef.current.clear(); // Clear the file input
+    }
+  };
+
   return (
-    <div className="p-4">
-      <FileUpload
-        mode="basic"
-        accept=".xlsx, .xls"
-        maxFileSize={1000000}
-        chooseLabel="Upload Excel File"
-        customUpload
-        uploadHandler={handleFileUpload}
-      />
-    </div>
+    <Card title="Upload Excel File" className="p-4">
+      <form onSubmit={handleSubmit}>
+        <div className="p-field">
+          <FileUpload
+            ref={fileUploadRef} // Reference to reset input
+            mode="basic"
+            accept=".xlsx, .xls"
+            maxFileSize={1000000}
+            chooseLabel="Choose Excel File"
+            onSelect={handleFileUpload} // ✅ Automatically process the file on selection
+          />
+        </div>
+
+        {file && (
+          <p style={{ marginTop: "10px", fontWeight: "bold" }}>
+            Uploaded File: {file.name}
+          </p>
+        )}
+
+        <div style={{ marginTop: "10px", display: "flex", gap: "10px" }}>
+          <Button
+            type="submit"
+            label="Submit Data"
+            icon="pi pi-check"
+            className="p-button-success p-button-sm"
+          />
+          {file && (
+            <Button
+              label="Reset"
+              icon="pi pi-refresh"
+              className="p-button-secondary p-button-sm"
+              onClick={handleReset}
+            />
+          )}
+        </div>
+      </form>
+
+      <Dialog
+        visible={showModal}
+        onHide={() => setShowModal(false)}
+        header="Error"
+        footer={<Button label="OK" onClick={() => setShowModal(false)} />}
+      >
+        <p>Please upload an Excel file before submitting.</p>
+      </Dialog>
+    </Card>
   );
 };
 

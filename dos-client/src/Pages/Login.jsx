@@ -137,7 +137,7 @@ export default function Login({ toast }) {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "275px" }}
+            style={{ width: "100%" }}
             placeholder="Email"
             keyfilter={"email"}
           />
@@ -152,6 +152,7 @@ export default function Login({ toast }) {
             toggleMask
             feedback={false}
             placeholder="Password"
+            style={{width:"100%"}}
           />
           <br />
           <br />

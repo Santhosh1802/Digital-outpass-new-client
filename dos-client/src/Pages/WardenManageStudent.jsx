@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
+import NavBarWarden from "../Components/NavBarWarden";
 import ExcelToJson from "../Components/ExcelToJson";
 import { Button } from "primereact/button";
 import { useSelector } from "react-redux";
@@ -7,18 +8,35 @@ import { GetAllStudent, DeleteStudent } from "../Api";
 import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import NavBarWarden from "../Components/NavBarWarden";
+import { InputText } from "primereact/inputtext";
+
 export default function WardenManageStudent() {
-  const [student, setStudent] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [filteredStudents, setFilteredStudents] = useState([]);
+  const [searchName, setSearchName] = useState("");
+  const [searchDepartment, setSearchDepartment] = useState("");
   const token = useSelector((state) => state.user.token);
+
   useEffect(() => {
     const getStudent = async () => {
       const res = await GetAllStudent(token);
-      setStudent(res.data.result);
+      setStudents(res.data.result);
+      setFilteredStudents(res.data.result);
     };
     getStudent();
   }, []);
-  const handleAddStudent = async () => {};
+
+  useEffect(() => {
+    let filtered = students.filter(
+      (student) =>
+        student.name.toLowerCase().includes(searchName.toLowerCase()) &&
+        student.department
+          .toLowerCase()
+          .includes(searchDepartment.toLowerCase())
+    );
+    setFilteredStudents(filtered);
+  }, [searchName, searchDepartment]);
+
   const profileTemplate = (rowData) => {
     return (
       <img
@@ -28,24 +46,27 @@ export default function WardenManageStudent() {
       />
     );
   };
+
   const serialNumberTemplate = (rowData, { rowIndex }) => {
     return <span>{rowIndex + 1}</span>;
   };
-  const handleDelete = (rowData) => {
-    console.log(rowData._id);
 
+  const handleDelete = (rowData) => {
     confirmDialog({
       message: `Are you sure you want to delete ${rowData.name}?`,
       header: "Confirm Delete",
       icon: "pi pi-exclamation-triangle",
       acceptClassName: "p-button-danger",
       accept: async () => {
-        await DeleteStudent(token, rowData._id).then(() => {
-          setStudent(student.filter((item) => item.id !== rowData.id));
-        });
+        await DeleteStudent(token, rowData._id);
+        setStudents(students.filter((item) => item._id !== rowData._id));
+        setFilteredStudents(
+          filteredStudents.filter((item) => item._id !== rowData._id)
+        );
       },
     });
   };
+
   const deleteTemplate = (rowData) => {
     return (
       <Button
@@ -56,6 +77,7 @@ export default function WardenManageStudent() {
       />
     );
   };
+
   return (
     <div
       style={{
@@ -66,16 +88,55 @@ export default function WardenManageStudent() {
       }}
     >
       <NavBarWarden />
-      <div style={{ marginTop: "4em" }}>
-        <h1>Manage Student</h1>
-        <ExcelToJson />
+      <div style={{ marginTop: "4em", width: "80%" }}>
+        <h1>Manage Students</h1>
         <Button
-          label="Add Student"
-          onClick={handleAddStudent}
-          style={{ marginTop:"1em",marginBottom:"1em"}}
+          label="Download Bulk Upload Template"
+          icon="pi pi-download"
+          onClick={() => {
+            const fileUrl =
+              "https://docs.google.com/spreadsheets/d/15JBCATtfP2EKIt7qow2UVY_V5X4i3Uhc/export?format=xlsx";
+            const a = document.createElement("a");
+            a.href = fileUrl;
+            a.download = "Bulk Upload Template.xlsx";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          }}
+          style={{ marginBottom: "1em" }}
         />
+
+        <ExcelToJson />
+        {/* <Button label="Add Student" style={{ marginTop: "1em", marginBottom: "1em" }} /> */}
         <ConfirmDialog />
-        <DataTable value={student} paginator rows={5}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            flexWrap: "wrap",
+          }}
+        >
+          <div style={{ margin: "1em" }}>
+            <label htmlFor="name">Search By Name</label>
+            <br />
+            <InputText
+              placeholder="Enter Name"
+              value={searchName}
+              onChange={(e) => setSearchName(e.target.value)}
+            />
+          </div>
+          <div style={{ margin: "1em" }}>
+            <label htmlFor="department">Search By Department</label>
+            <br />
+            <InputText
+              placeholder="Enter Department"
+              value={searchDepartment}
+              onChange={(e) => setSearchDepartment(e.target.value)}
+            />
+          </div>
+        </div>
+        <DataTable value={filteredStudents} paginator rows={5}>
           <Column header="S.No" body={serialNumberTemplate}></Column>
           <Column header="Profile Photo" body={profileTemplate}></Column>
           <Column field="name" header="Name" sortable></Column>

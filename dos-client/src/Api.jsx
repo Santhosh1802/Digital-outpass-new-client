@@ -337,11 +337,13 @@ export async function VerifyQr(auth_token, token) {
         },
       }
     );
-    console.log(res);
+    console.log(res.data);
     response.message = res.data.message;
+    response.data=res.data.result;
   } catch (error) {
     response.error = error.message;
   }
+  return response;
 }
 
 export async function GetAllStudent(token) {
@@ -357,7 +359,6 @@ export async function GetAllStudent(token) {
       },
       withCredentials: true,
     });
-    console.log(res.data);
     response.data = res.data;
   } catch (error) {
     console.log(error);
@@ -505,6 +506,20 @@ export async function AddWarden(data) {
     response.message = res.message;
   } catch (error) {
     response.error = error.message;
+  }
+  return response;
+}
+
+export async function AddStudent(data){
+  const response={
+    message:"",
+    error:"",
+  }
+  try {
+    const res=await axios.post(process.env.REACT_APP_ADMIN_CREATE_STUDENT,{data},{withCredentials:true});
+    response.message=res.data.message;
+  } catch (error) {
+    response.error=error.message;
   }
   return response;
 }

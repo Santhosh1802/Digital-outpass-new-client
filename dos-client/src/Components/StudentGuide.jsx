@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 export default function StudentGuide() {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
-    <div style={{maxWidth:"360px"}}>
+    <div style={{width:"80%" }}>
       <Card>
         <h1>DOS Quick Guide</h1>
         <div

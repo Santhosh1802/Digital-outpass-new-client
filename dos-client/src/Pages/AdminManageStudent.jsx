@@ -27,9 +27,12 @@ export default function AdminManageStudent() {
   }, []);
 
   useEffect(() => {
-    let filtered = students.filter((student) =>
-      student.name.toLowerCase().includes(searchName.toLowerCase()) &&
-      student.department.toLowerCase().includes(searchDepartment.toLowerCase())
+    let filtered = students.filter(
+      (student) =>
+        student.name.toLowerCase().includes(searchName.toLowerCase()) &&
+        student.department
+          .toLowerCase()
+          .includes(searchDepartment.toLowerCase())
     );
     setFilteredStudents(filtered);
   }, [searchName, searchDepartment]);
@@ -57,7 +60,9 @@ export default function AdminManageStudent() {
       accept: async () => {
         await DeleteStudent(token, rowData._id);
         setStudents(students.filter((item) => item._id !== rowData._id));
-        setFilteredStudents(filteredStudents.filter((item) => item._id !== rowData._id));
+        setFilteredStudents(
+          filteredStudents.filter((item) => item._id !== rowData._id)
+        );
       },
     });
   };
@@ -74,28 +79,59 @@ export default function AdminManageStudent() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <NavBarAdmin />
-      <div style={{ marginTop: "4em" }}>
+      <div style={{ marginTop: "4em", width: "80%" }}>
         <h1>Manage Students</h1>
+        <Button
+          label="Download Bulk Upload Template"
+          icon="pi pi-download"
+          onClick={() => {
+            const fileUrl =
+              "https://docs.google.com/spreadsheets/d/15JBCATtfP2EKIt7qow2UVY_V5X4i3Uhc/export?format=xlsx";
+            const a = document.createElement("a");
+            a.href = fileUrl;
+            a.download = "Bulk Upload Template.xlsx";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          }}
+          style={{ marginBottom: "1em" }}
+        />
+
         <ExcelToJson />
-        <Button label="Add Student" style={{ marginTop: "1em", marginBottom: "1em" }} />
         <ConfirmDialog />
-        <div style={{display:"flex",flexDirection:"row",justifyContent:"space-evenly",margin:"2em"}}>
-          <div>
-            <label htmlFor="name">Search By Name</label><br />
-            <InputText 
-              placeholder="Enter Name" 
-              value={searchName} 
-              onChange={(e) => setSearchName(e.target.value)} 
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            flexWrap: "wrap",
+          }}
+        >
+          <div style={{ margin: "1em" }}>
+            <label htmlFor="name">Search By Name</label>
+            <br />
+            <InputText
+              placeholder="Enter Name"
+              value={searchName}
+              onChange={(e) => setSearchName(e.target.value)}
             />
           </div>
-          <div>
-            <label htmlFor="department">Search By Department</label><br />
-            <InputText 
-              placeholder="Enter Department" 
-              value={searchDepartment} 
-              onChange={(e) => setSearchDepartment(e.target.value)} 
+          <div style={{ margin: "1em" }}>
+            <label htmlFor="department">Search By Department</label>
+            <br />
+            <InputText
+              placeholder="Enter Department"
+              value={searchDepartment}
+              onChange={(e) => setSearchDepartment(e.target.value)}
             />
           </div>
         </div>
@@ -104,7 +140,11 @@ export default function AdminManageStudent() {
           <Column header="Profile Photo" body={profileTemplate}></Column>
           <Column field="name" header="Name" sortable></Column>
           <Column field="department" header="Department" sortable></Column>
-          <Column header="Actions" body={deleteTemplate} style={{ width: "10%" }}></Column>
+          <Column
+            header="Actions"
+            body={deleteTemplate}
+            style={{ width: "10%" }}
+          ></Column>
         </DataTable>
       </div>
     </div>

@@ -29,26 +29,16 @@ export default function StudentViewRequestStatus() {
       }}
     >
       <NavBarStudent />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "5em",
-        }}
-      >
-        <h1>Outpass Request Status</h1>
-        <DataTable
-          value={data}
-          emptyMessage="No Request Found"
-          style={{ maxWidth: "360px", overflow: "scroll" }}
-        >
-          <Column field="out_time" header="Out Time"></Column>
-          <Column field="in_time" header="In Time"></Column>
-          <Column field="reason" header="Reason"></Column>
-          <Column field="status" header="Status"></Column>
-        </DataTable>
+      <div style={{ width: "80%", overflow: "scroll", marginTop: "4em" }}>
+        <div>
+          <h1>Outpass Request Status</h1>
+          <DataTable value={data} emptyMessage="No Request Found">
+            <Column field="out_time" header="Out Time"></Column>
+            <Column field="in_time" header="In Time"></Column>
+            <Column field="reason" header="Reason"></Column>
+            <Column field="status" header="Status"></Column>
+          </DataTable>
+        </div>
       </div>
     </div>
   );

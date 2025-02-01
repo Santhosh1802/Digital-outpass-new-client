@@ -120,7 +120,7 @@ export default function AdminManageWarden({ toast }) {
     >
       <NavBarAdmin />
       <ConfirmDialog />
-      <div style={{ marginTop: "4em" }}>
+      <div style={{ marginTop: "4em",width:"80%" }}>
         <h1>Manage Warden</h1>
         <Button
           label="Add Warden"
@@ -151,21 +151,20 @@ export default function AdminManageWarden({ toast }) {
       <Dialog
         visible={modalVisible}
         onHide={() => setModalVisible(false)}
-        header="Add Security"
+        header="Add Warden"
       >
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
-            width: "500px",
+            justifyContent:"space-evenly",
+            width: "100%",
             height: "70vh",
           }}
         >
           {/* <FileUpload mode="basic" accept="image/*" maxFileSize={1000000} onSelect={handleFileUpload} auto chooseLabel="Upload Profile" />
               {previewImage && <img src={previewImage} alt="Preview" style={{ width: "100px", height: "100px", borderRadius: "50%", marginTop: "1em" }} />}
               <br /> */}
-          <label htmlFor="name">Name</label>
           <InputText
             placeholder="Name"
             value={newWarden.name}

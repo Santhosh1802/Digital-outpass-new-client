@@ -39,7 +39,7 @@ export default function StudentRequestOutpass({toast}) {
   return (
     <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
       <NavBarStudent />
-      <form onSubmit={handleRequest}>
+      <form onSubmit={handleRequest} style={{width:"80%"}}>
         <div
           style={{
             display: "flex",
@@ -87,7 +87,7 @@ export default function StudentRequestOutpass({toast}) {
           />
           </div>
           
-          <Button type="submit" label="Send Request" severity="success" style={{width:"245px"}}/>
+          <Button type="submit" label="Send Request" severity="success" style={{width:"250px"}}/>
         </div>
       </form>
     </div>
