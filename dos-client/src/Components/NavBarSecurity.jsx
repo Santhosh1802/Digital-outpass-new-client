@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { persistor } from "../store";
 import axios from "axios";
-export default function NavBarAdmin() {
+export default function NavBarSecurity() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogout = async () => {
@@ -20,27 +20,17 @@ export default function NavBarAdmin() {
     {
       label: "Home",
       icon: "pi pi-home",
-      command: () => navigate("/admindashboard"),
-    },
-    // {
-    //   label: "Profile",
-    //   icon: "pi pi-user",
-    //   command: () => navigate("/adminprofile"),
-    // },
-    {
-      label: "Manage Students",
-      icon: "pi pi-user-edit",
-      command: () => navigate("/adminmanagestudent"),
+      command: () => navigate("/securitydashboard"),
     },
     {
-      label: "Manage Wardens",
-      icon: "pi pi-user-edit",
-      command: () => navigate("/adminmanagewarden"),
+      label: "Profile",
+      icon: "pi pi-user",
+      command:()=>navigate("/securityprofile")
     },
     {
-      label: "Manage Securities",
-      icon: "pi pi-user-edit",
-      command: () => navigate("/adminmanagesecurity"),
+      label: "View History",
+      icon: "pi pi-eye",
+      command:()=>navigate("/securityviewhistory")
     },
     {
       label: "Logout",

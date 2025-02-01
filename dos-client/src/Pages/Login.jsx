@@ -22,7 +22,7 @@ export default function Login({ toast }) {
       //console.log("Test",res.data);
       
       //console.log("Session Test Response:", res.data.result._id);
-  
+      if(res.data){
       if (res.data.status===201) {
         dispatch(setId(res.data.result._id));
         dispatch(setUserType(res.data.result.user_type));
@@ -44,6 +44,7 @@ export default function Login({ toast }) {
       } else {
         console.error("Invalid session:", res.data.message || "Unknown error");
       }
+    }
     } catch (err) {
       //console.error("Session Test Error:", err.response?.data || err.message);
     }

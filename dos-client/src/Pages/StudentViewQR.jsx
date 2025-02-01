@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import NavBarStudent from "../Components/NavBarStudent";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
-import { GenerateQR } from "../Api";
-import { useSelector } from "react-redux";
+import { GenerateQR} from "../Api";
 export default function StudentViewQR() {
   const [qr, setQr] = useState("");
-  const id=useSelector((state)=>state.user.id);
+  useEffect(()=>{
+    async function getqr(){
+      const res= await GenerateQR();
+      setQr(res.data);
+    }
+    getqr();
+  },[])
+  
   const handleQr=async()=>{
-    const res=await GenerateQR(id);
-    console.log(res.data);
+    const res=await GenerateQR();
     setQr(res.data);
   }
   return (
@@ -34,16 +39,15 @@ export default function StudentViewQR() {
         }}
       >
         <Image
-          src={`data:image/jpeg;base64,${qr}`}
+          src={qr}
           alt=""
           width="370px"
           height="370px"
           preview
           style={{
-            border: "2px solid black",
+            border: "px solid black",
             width: "370px",
             height: "370px",
-            borderRadius: "2em",
           }}
         />
       </div>

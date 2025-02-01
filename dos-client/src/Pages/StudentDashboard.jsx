@@ -29,7 +29,7 @@ export default function StudentDashboard() {
   return (
     <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
       <NavBarStudent />
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center" ,marginTop:"4em"}}>
         <h1>Welcome Student</h1>
       </div>
       <StudentGuide />

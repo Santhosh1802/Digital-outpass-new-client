@@ -55,7 +55,6 @@ export default function StudentRequestOutpass({toast}) {
           <br />
           <InputText
             id="reason"
-            keyfilter={"alpha"}
             value={reason}
             placeholder="Your Reason"
             onChange={(e) => setReason(e.target.value)}

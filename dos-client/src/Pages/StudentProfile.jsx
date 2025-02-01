@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState,useEffect } from "react";
 import { Image } from "primereact/image";
 import { InputText } from "primereact/inputtext";
@@ -28,18 +29,19 @@ export default function StudentProfile({toast}) {
       const fetchStudentInfo=async()=>{
         try {
           const res=await GetStudentInfo(id);
-          setProfileData(res.data.result);
+          console.log(res.data);
+          
+          setProfileData(res.data);
           setLoading(false);
           if(res.data===""){
             navigate("/studentfirstupdate");
           }
         } catch (error) {
           //console.log(error);
-          
         }
       }
       fetchStudentInfo();
-    }, [navigate,id]);
+    }, []);
     const handleFileUpload = (e) => {
       const file = e.files[0];
       const reader = new FileReader();
@@ -95,10 +97,9 @@ export default function StudentProfile({toast}) {
             alt=""
             preview
             style={{
-              border: "2px solid black",
+              border: "px solid black",
               width: "200px",
               height: "200px",
-              borderRadius: "2em",
             }}
             width="200px"
             height="200px"

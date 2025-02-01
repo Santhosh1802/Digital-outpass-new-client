@@ -12,8 +12,10 @@ export default function NavBarStudent() {
       dispatch({ type: "user/logout" });
       navigate("/");
     });
-      await axios.delete(process.env.REACT_APP_SESSION_LOGOUT,{withCredentials:true});
-      //console.log(res);
+    await axios.delete(process.env.REACT_APP_SESSION_LOGOUT, {
+      withCredentials: true,
+    });
+    //console.log(res);
   };
   const items = [
     {
@@ -54,14 +56,20 @@ export default function NavBarStudent() {
       src="https://i.postimg.cc/xdPzZMgM/Logo.jpg"
       height="40"
       className="mr-2"
-      style={{ borderRadius: "5px", marginRight: "7em" }}
+      style={{ borderRadius: "5px", marginRight: "120px",marginTop:"2px" }}
     ></img>
   );
 
   return (
     <div
       className="card"
-      style={{ position: "fixed", top: 0,width:"99%",marginTop:"8px", zIndex: 1 }}
+      style={{
+        position: "fixed",
+        top: 0,
+        width: "99%",
+        marginTop: "8px",
+        zIndex: 1,
+      }}
     >
       <Menubar model={items} end={start} />
     </div>

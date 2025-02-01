@@ -5,22 +5,29 @@ import { Column } from "primereact/column";
 import { GetTransactionStatus } from "../Api";
 
 export default function StudentViewRequestStatus() {
-  const [data,setData]=useState([]);
-  useEffect(()=>{
-    const fetchData=async()=>{
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
       try {
-        const res=await GetTransactionStatus();
-        if(res.data){
+        const res = await GetTransactionStatus();
+        if (res.data) {
           setData(res.data);
         }
       } catch (error) {
         console.log(error);
       }
-    }
+    };
     fetchData();
-  },[])
+  }, []);
   return (
-    <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <NavBarStudent />
       <div
         style={{
@@ -28,11 +35,15 @@ export default function StudentViewRequestStatus() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          marginTop:"5em"
+          marginTop: "5em",
         }}
       >
         <h1>Outpass Request Status</h1>
-        <DataTable value={data} emptyMessage="No Request Found">
+        <DataTable
+          value={data}
+          emptyMessage="No Request Found"
+          style={{ maxWidth: "360px", overflow: "scroll" }}
+        >
           <Column field="out_time" header="Out Time"></Column>
           <Column field="in_time" header="In Time"></Column>
           <Column field="reason" header="Reason"></Column>

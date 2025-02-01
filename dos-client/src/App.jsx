@@ -8,8 +8,16 @@ const Login = lazy(() => import("./Pages/Login"));
 const ForgotPassword = lazy(() => import("./Pages/ForgotPassword"));
 const ResetPassword = lazy(() => import("./Pages/ResetPassword"));
 const AdminDashboard = lazy(() => import("./Pages/AdminDashboard"));
+const AdminManageStudent=lazy(()=>import("./Pages/AdminManageStudent"));
+const AdminManageWarden=lazy(()=>import("./Pages/AdminManageWarden"));
+const AdminManageSecurity=lazy(()=>import("./Pages/AdminManageSecurity"));
 const SecurityDashboard = lazy(() => import("./Pages/SecurityDashboard"));
+const SecurityProfile=lazy(()=>import("./Pages/SecurityProfile"));
+const SecurityViewHistory=lazy(()=>import("./Pages/SecurityViewHistory"));
 const WardenDashboard = lazy(() => import("./Pages/WardenDashboard"));
+const WardenProfile=lazy(()=>import("./Pages/WardenProfile"));
+const WardenViewHistory=lazy(()=>import("./Pages/WardenViewHistory"));
+const WardenManageStudent=lazy(()=>import("./Pages/WardenManageStudent"));
 const StudentDashboard = lazy(() => import("./Pages/StudentDashboard"));
 const StudentProfile = lazy(() => import("./Pages/StudentProfile"));
 const StudentRequestOutpass = lazy(() =>import("./Pages/StudentRequestOutpass"));
@@ -72,9 +80,17 @@ export default function App() {
               element={<ResetPassword toast={toast} />}
             />
             <Route path="/admindashboard" element={<AdminDashboard />} />
+            <Route path="/adminmanagestudent" element={<AdminManageStudent toast={toast}/>}/>
+            <Route path="/adminmanagewarden" element={<AdminManageWarden toast={toast}/>}/>
+            <Route path="/adminmanagesecurity" element={<AdminManageSecurity toast={toast}/>}/>
             <Route path="/studentdashboard" element={<StudentDashboard toast={toast}/>} />
-            <Route path="/wardendashboard" element={<WardenDashboard />} />
-            <Route path="/securitydashboard" element={<SecurityDashboard />} />
+            <Route path="/wardendashboard" element={<WardenDashboard toast={toast}/>} />
+            <Route path="/wardenprofile" element={<WardenProfile/>}/>
+            <Route path="/wardenviewhistory" element={<WardenViewHistory/>}/>
+            <Route path="/wardenmanagestudent" element={<WardenManageStudent/>}/>
+            <Route path="/securitydashboard" element={<SecurityDashboard toast={toast}/>} />
+            <Route path="/securityprofile" element={<SecurityProfile/>}/>
+            <Route path="/securityviewhistory" element={<SecurityViewHistory/>}/>
             <Route path="/studentprofile" element={<StudentProfile toast={toast} />} />
             <Route
               path="/studentrequestoutpass"
