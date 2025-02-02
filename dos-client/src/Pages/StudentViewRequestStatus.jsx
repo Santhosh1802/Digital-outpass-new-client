@@ -14,7 +14,7 @@ export default function StudentViewRequestStatus() {
           setData(res.data);
         }
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
     fetchData();

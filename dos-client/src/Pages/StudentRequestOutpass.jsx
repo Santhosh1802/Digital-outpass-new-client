@@ -20,7 +20,7 @@ export default function StudentRequestOutpass({toast}) {
       reason:reason,
       login:id,
     }
-    console.log(data);
+    //console.log(data);
     if(reason===""||outTime===""||inTime===""){
       toast.current.show({severity:"warn",summary:"Warning",detail:"Please fill all fields"});
       return;

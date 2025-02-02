@@ -56,7 +56,7 @@ export default function AdminManageSecurity({ toast }) {
   // };
 
   const handleSubmit = async () => {
-    console.log(newSecurity);
+    //console.log(newSecurity);
     const res = await AddSecurity(newSecurity);
     if (res.error === "") {
       toast.current.show({
@@ -96,7 +96,7 @@ export default function AdminManageSecurity({ toast }) {
       icon: "pi pi-exclamation-triangle",
       acceptClassName: "p-button-danger",
       accept: async () => {
-        await DeleteSecurity(token, rowData._id);
+        await DeleteSecurity(token, rowData.login);
         setSecurity(security.filter((item) => item.id !== rowData.id));
         setFilteredSecurity(
           filteredSecurity.filter((item) => item.id !== rowData.id)

@@ -20,12 +20,12 @@ const StudentRequests = ({ details, loading ,token}) => {
 
   const handleAccept = (_id) => {
     UpdateRequestStatus(token,_id,"Accepted");
-    console.log("Accepted request with ID:", _id);
+    //console.log("Accepted request with ID:", _id);
   };
 
   const handleReject = (_id) => {
     UpdateRequestStatus(token,_id,"Rejected");
-    console.log("Rejected request with ID:", _id);
+    //console.log("Rejected request with ID:", _id);
   };
 
   const handleCloseModal = () => {

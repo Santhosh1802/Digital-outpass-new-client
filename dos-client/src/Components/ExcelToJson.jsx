@@ -11,7 +11,8 @@ const ExcelToJson = () => {
   const [file, setFile] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const fileUploadRef = useRef(null);
-
+  const [message,setMessage]=useState("");
+  const [error,setError]=useState("");
   const handleFileUpload = (event) => {
     const uploadedFile = event.files[0];
     if (!uploadedFile) return;
@@ -36,17 +37,21 @@ const ExcelToJson = () => {
       setShowModal(true);
       return;
     }
-    console.log("Submitted Data:", jsonData);
+    //console.log("Submitted Data:", jsonData);
     const res=await AddStudent(jsonData);
-    console.log(res);
+    //console.log(res);
+    setError(res.error);
+    setMessage(res.message);
     
   };
 
   const handleReset = () => {
+    setError("");
+    setMessage("");
     setJsonData([]);
     setFile(null);
     if (fileUploadRef.current) {
-      fileUploadRef.current.clear(); // Clear the file input
+      fileUploadRef.current.clear(); 
     }
   };
 
@@ -55,12 +60,12 @@ const ExcelToJson = () => {
       <form onSubmit={handleSubmit}>
         <div className="p-field">
           <FileUpload
-            ref={fileUploadRef} // Reference to reset input
+            ref={fileUploadRef} 
             mode="basic"
             accept=".xlsx, .xls"
             maxFileSize={1000000}
             chooseLabel="Choose Excel File"
-            onSelect={handleFileUpload} // ✅ Automatically process the file on selection
+            onSelect={handleFileUpload} 
           />
         </div>
 
@@ -86,6 +91,8 @@ const ExcelToJson = () => {
             />
           )}
         </div>
+        <p style={{color:"red"}}>{error}</p>
+        <p style={{color:"green"}}>{message}</p>
       </form>
 
       <Dialog

@@ -24,7 +24,7 @@ export async function LoginPost(email, password) {
       response.token = res.data.result.token;
     }
   } catch (err) {
-    console.log(err);
+    //console.log(err);
     if (err.response) {
       response.error = err.response.data.message;
     }
@@ -46,7 +46,7 @@ export async function ForgotPasswordPost(email) {
       },
       { withCredentials: true }
     );
-    console.log(res);
+    //console.log(res);
 
     response.message = res.data.message;
   } catch (error) {
@@ -91,7 +91,7 @@ export async function GetStudentInfo(id) {
     );
     response.data = res.data.result;
     response.message = res.message;
-    console.log(res.data);
+    //console.log(res.data);
   } catch (error) {
     response.error = error.response.data.message;
   }
@@ -106,8 +106,8 @@ export async function UpdateStudentInfo(email, data) {
   try {
     if (email && data) {
       const url = `${process.env.REACT_APP_UPDATE_STUDENT}/${email}`;
-      console.log("Request URL:", url);
-      console.log(data);
+      //console.log("Request URL:", url);
+      //console.log(data);
       const res = await axios.put(url, {
         name: data.name,
         mobile: data.mobile,
@@ -124,7 +124,7 @@ export async function UpdateStudentInfo(email, data) {
     }
   } catch (error) {
     response.error = error.message;
-    console.log(error);
+    //console.log(error);
 
     return response;
   }
@@ -152,10 +152,10 @@ export async function CreateStudent(data) {
       },
       { withCredentials: true }
     );
-    console.log(res);
+    //console.log(res);
     response.message = res.data.message;
   } catch (error) {
-    console.log(data);
+    //console.log(data);
 
     response.error = error;
   }
@@ -178,10 +178,10 @@ export async function CreateTransaction(data) {
       },
       { withCredentials: true }
     );
-    console.log(res);
+    //console.log(res);
     response.message = res.message;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     response.error = error.message;
   }
   return response;
@@ -201,7 +201,7 @@ export async function GetTransactionStatus() {
     //console.log(res.data);
     response.data = res.data.result;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
   return response;
 }
@@ -229,9 +229,9 @@ export async function GenerateQR(id) {
           response.data = qr_res.data.result;
         }
       });
-    console.log(trans_res);
+    //console.log(trans_res);
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
   return response;
 }
@@ -247,7 +247,7 @@ export async function GetWardenProfile(id) {
       `${process.env.REACT_APP_GET_WARDEN_VIA_LOGIN_ID}${id}`,
       { withCredentials: true }
     );
-    console.log(res.data);
+    //console.log(res.data);
     response.message = res.data.message;
     response.data = res.data;
   } catch (error) {
@@ -294,9 +294,9 @@ export async function UpdateRequestStatus(token, id, status) {
         withCredentials: true,
       }
     );
-    console.log(res.data);
+    //console.log(res.data);
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
   return response;
 }
@@ -312,7 +312,7 @@ export async function GetSecurityProfile() {
       `${process.env.REACT_APP_GET_SECURITY_VIA_SESSION_ID}`,
       { withCredentials: true }
     );
-    console.log(res.data);
+    //console.log(res.data);
     response.message = res.data.message;
     response.data = res.data;
   } catch (error) {
@@ -361,7 +361,7 @@ export async function GetAllStudent(token) {
     });
     response.data = res.data;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     response.error = error;
   }
   return response;
@@ -383,7 +383,7 @@ export async function GetAllWarden(token) {
     //console.log(res.data);
     response.data = res.data;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     response.error = error;
   }
   return response;
@@ -405,7 +405,7 @@ export async function GetAllSecurity(token) {
     //console.log(res.data);
     response.data = res.data;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     response.error = error;
   }
   return response;
@@ -422,7 +422,7 @@ export async function DeleteWarden(token, id) {
       { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
     );
     response.message = res.data.message;
-    console.log(res.data);
+    //console.log(res.data);
     
   } catch (error) {
     response.error = error.message;
@@ -457,6 +457,8 @@ export async function DeleteStudent(token, id) {
       `${process.env.REACT_APP_ADMIN_DELETE_STUDENT}/${id}`,
       { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
     );
+    //console.log(res.data);
+    
     response.message = res.data.message;
   } catch (error) {
     response.error = error.message;
@@ -516,10 +518,11 @@ export async function AddStudent(data){
     error:"",
   }
   try {
-    const res=await axios.post(process.env.REACT_APP_ADMIN_CREATE_STUDENT,{data},{withCredentials:true});
+    const res=await axios.post(process.env.REACT_APP_ADMIN_CREATE_STUDENT,{students:data},{withCredentials:true});
     response.message=res.data.message;
   } catch (error) {
-    response.error=error.message;
+    //console.log(error.response.data.message);
+    response.error=error.response.data.message;
   }
   return response;
 }

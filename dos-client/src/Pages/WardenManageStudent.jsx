@@ -58,7 +58,7 @@ export default function WardenManageStudent() {
       icon: "pi pi-exclamation-triangle",
       acceptClassName: "p-button-danger",
       accept: async () => {
-        await DeleteStudent(token, rowData._id);
+        await DeleteStudent(token, rowData.login);
         setStudents(students.filter((item) => item._id !== rowData._id));
         setFilteredStudents(
           filteredStudents.filter((item) => item._id !== rowData._id)
@@ -107,7 +107,6 @@ export default function WardenManageStudent() {
         />
 
         <ExcelToJson />
-        {/* <Button label="Add Student" style={{ marginTop: "1em", marginBottom: "1em" }} /> */}
         <ConfirmDialog />
         <div
           style={{

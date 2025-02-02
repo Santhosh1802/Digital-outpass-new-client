@@ -58,7 +58,7 @@ export default function AdminManageStudent() {
       icon: "pi pi-exclamation-triangle",
       acceptClassName: "p-button-danger",
       accept: async () => {
-        await DeleteStudent(token, rowData._id);
+        await DeleteStudent(token, rowData.login);
         setStudents(students.filter((item) => item._id !== rowData._id));
         setFilteredStudents(
           filteredStudents.filter((item) => item._id !== rowData._id)

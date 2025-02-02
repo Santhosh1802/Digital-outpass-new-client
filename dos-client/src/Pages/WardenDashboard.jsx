@@ -49,7 +49,7 @@ export default function WardenDashboard() {
     .then(()=>{
       getDetails(token);
     })
-    console.log("Accepted request with ID:", _id);
+    //console.log("Accepted request with ID:", _id);
   };
 
   const handleReject = (_id) => {
@@ -57,7 +57,7 @@ export default function WardenDashboard() {
     .then(()=>{
       getDetails(token);
     })
-    console.log("Rejected request with ID:", _id);
+    //console.log("Rejected request with ID:", _id);
   };
 
   const handleCloseModal = () => {

@@ -16,12 +16,12 @@ export default function SecurityProfile({ toast }) {
     const fetchWardenInfo = async () => {
       try {
         const res = await GetSecurityProfile();
-        console.log(res);
+        //console.log(res);
         
         setProfileData(res.data.result);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
     fetchWardenInfo();

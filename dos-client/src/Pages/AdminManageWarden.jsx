@@ -86,7 +86,7 @@ export default function AdminManageWarden({ toast }) {
       icon: "pi pi-exclamation-triangle",
       acceptClassName: "p-button-danger",
       accept: async () => {
-        await DeleteWarden(token, rowData._id).then(()=>{
+        await DeleteWarden(token, rowData.login).then(()=>{
           getWarden();
         })
        

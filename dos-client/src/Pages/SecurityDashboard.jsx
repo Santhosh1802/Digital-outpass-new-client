@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { useSelector } from "react-redux";

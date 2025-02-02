@@ -11,7 +11,7 @@ export default function StudentDashboard() {
     const fetchStudentInfo = async () => {
       try {
         if (id === undefined) {
-          console.log("No id");
+          //console.log("No id");
         }
         const res = await GetStudentInfo(id);
 
@@ -19,7 +19,7 @@ export default function StudentDashboard() {
           navigate("/studentfirstupdate");
         }
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
     fetchStudentInfo();
