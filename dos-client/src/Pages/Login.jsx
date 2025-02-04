@@ -42,7 +42,7 @@ export default function Login({ toast }) {
           navigate("/wardendashboard");
         }
       } else {
-        console.error("Invalid session:", res.data.message || "Unknown error");
+        //console.error("Invalid session:", res.data.message || "Unknown error");
       }
     }
     } catch (err) {
