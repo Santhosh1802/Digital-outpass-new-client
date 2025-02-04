@@ -47,7 +47,7 @@ export default function ForgotPassword({ toast }) {
     >
       <div
         style={{
-          padding: "5%",
+          padding: "2em",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -66,9 +66,10 @@ export default function ForgotPassword({ toast }) {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "275px"}}
+            style={{ width: "100%"}}
             placeholder="Email"
             keyfilter={"email"}
+            
           />
           <br />
           <br />

@@ -76,7 +76,7 @@ export default function App() {
               element={<ForgotPassword toast={toast} />}
             />
             <Route
-              path="/account/auth/reset/:token"
+              path="/account/auth/reset/"
               element={<ResetPassword toast={toast} />}
             />
             <Route path="/admindashboard" element={<AdminDashboard />} />

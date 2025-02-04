@@ -106,7 +106,7 @@ export default function WardenDashboard() {
       }}
     >
       <NavBarWarden />
-      <div style={{ marginTop: "4em" }}>
+      <div style={{ marginTop: "4em" ,width:"80%"}}>
         <h1>Welcome Warden</h1>
         <div className="d-flex flex-column min-vh-100">
           <h2 className="mt-4" style={{ textAlign: "center" }}>

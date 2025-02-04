@@ -23,7 +23,7 @@ export default function WardenViewHistory() {
       }}
     >
       <NavBarWarden />
-      <div style={{ marginTop: "4em" }}>
+      <div style={{ marginTop: "4em" ,width:"80%"}}>
         <ViewOutPassHistory details={data} token={token} />
       </div>
     </div>

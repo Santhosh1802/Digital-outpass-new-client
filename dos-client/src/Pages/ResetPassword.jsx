@@ -3,9 +3,13 @@ import Logo from "../Components/Logo";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 import { ResetPasswordPost } from "../Api";
+import { useLocation} from "react-router-dom";
 export default function ResetPassword({ toast }) {
   const [password, setPassword] = useState("");
   const [confirmpassword,setConfirmPassword]=useState("");
+  const location=useLocation();
+  const searchParams=new URLSearchParams(location.search);
+  const token=searchParams.get("token");
   const handleResetPassword = async (e) => {
     e.preventDefault();
     if (password === "") {
@@ -25,7 +29,7 @@ export default function ResetPassword({ toast }) {
       });
     }
     if (password !== "" && confirmpassword!=="") {
-      const res = await ResetPasswordPost(password,confirmpassword);
+      const res = await ResetPasswordPost(password,confirmpassword,token);
       if (res.message === "") {
         toast.current.show({
           severity: "error",
@@ -56,7 +60,7 @@ export default function ResetPassword({ toast }) {
     >
       <div
         style={{
-          padding: "5%",
+          padding: "2em",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -78,6 +82,7 @@ export default function ResetPassword({ toast }) {
             toggleMask
             feedback={false}
             placeholder="Password"
+            style={{width:"100%"}}
           />
           <br />
           <br />
@@ -90,6 +95,7 @@ export default function ResetPassword({ toast }) {
             toggleMask
             feedback={false}
             placeholder="Confirm Password"
+            style={{width:"100%"}}
           />
           <br />
           <br />

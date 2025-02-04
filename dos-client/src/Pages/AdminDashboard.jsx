@@ -15,24 +15,25 @@ export default function AdminDashboard() {
       const stu_res=await GetAllStudent(token);
       const war_res=await GetAllWarden(token);
       const trans_res = await GetOutpassRequests(token);
+      if(trans_res){
       setData(trans_res.data);
       setCounts({
       security:sec_res.data.result.length,
       students:stu_res.data.result.length,
       warden:war_res.data.result.length,
       outpasses:trans_res.data.length,
-      })
+      })}
     }
     getDetails();
   },[])
   const cardStyle = {
     textAlign: "center",
-    padding: "2rem",
+    //padding: "2rem",
     fontSize: "1.5rem",
     marginBottom: "1rem",
     display:"flex", 
-    margin: "10px", 
-    width:"300px"
+    margin: "5px", 
+    width:"120px"
   };
 
   const containerStyle = {
@@ -52,7 +53,7 @@ export default function AdminDashboard() {
       }}
     >
       <NavBarAdmin />
-      <div style={{ marginTop: "4em" }}>
+      <div style={{ marginTop: "4em",width:"80%" }}>
         <div style={containerStyle}>
           <div style={cardStyle}>
             <Card title="Warden Count">

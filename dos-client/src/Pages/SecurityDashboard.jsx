@@ -44,8 +44,8 @@ export default function SecurityDashboard({toast}) {
       }}
     >
       <NavBarSecurity />
-      <div style={{ marginTop: "4em" }}>
-        <h1>Welcome Security</h1>
+      <div style={{ marginTop: "4em",width:"80%" }}>
+        <h1>Digital Outpass Scanner</h1>
         <div style={{ display: "flex", flexDirection: "row" }}>
           <div style={{ width: "500px", height: "500px" }}>
             

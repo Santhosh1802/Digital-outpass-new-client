@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 
 export async function LoginPost(email, password) {
@@ -31,8 +32,6 @@ export async function LoginPost(email, password) {
   }
   return response;
 }
-
-//TODO check with email
 export async function ForgotPasswordPost(email) {
   const response = {
     message: "",
@@ -55,20 +54,21 @@ export async function ForgotPasswordPost(email) {
   return response;
 }
 
-//TODO reset password check
-export async function ResetPasswordPost(password, confirmpassword) {
+export async function ResetPasswordPost(password, confirmpassword,token) {
   const response = {
     message: "",
     error: "",
   };
+  console.log(token);
+  
   try {
     const res = await axios.post(
-      process.env.REACT_APP_RESETPASSWORD_API,
+      `${process.env.REACT_APP_RESETPASSWORD_API}${token}`,
       {
         password: password,
         confirm_password: confirmpassword,
       },
-      { withCredentials: true }
+      {withCredentials: true }
     );
     response.message = res.data.message;
   } catch (err) {
@@ -214,7 +214,7 @@ export async function GenerateQR(id) {
     const trans_res = await axios
       .get(`${process.env.REACT_APP_GET_ONE_TRANSACTION_STUDENT}`, {
         params: {
-          status: "Accepted",
+          status: "Live",
         },
         withCredentials: true,
       })
