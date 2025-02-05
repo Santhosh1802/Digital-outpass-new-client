@@ -59,6 +59,7 @@ export default function App() {
           onIcon="pi pi-moon"
           offIcon="pi pi-sun"
           className="w-8rem"
+          aria-label="theme"
         />
       </div>
       <BrowserRouter>

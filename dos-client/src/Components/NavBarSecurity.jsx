@@ -42,7 +42,7 @@ export default function NavBarSecurity() {
   const start = (
     <img
       alt="logo"
-      src="https://i.postimg.cc/xdPzZMgM/Logo.jpg"
+      src="dos.png"
       height="40"
       className="mr-2"
       style={{ borderRadius: "5px",marginRight: "120px",marginTop:"2px"}}
