@@ -118,7 +118,7 @@ export default function Login({ toast }) {
     >
       <div
         style={{
-          padding: "2em",
+          padding: "1em",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
