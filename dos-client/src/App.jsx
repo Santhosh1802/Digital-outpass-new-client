@@ -4,6 +4,7 @@ import { Toast } from "primereact/toast";
 import { ToggleButton } from "primereact/togglebutton";
 import { ProgressSpinner } from "primereact/progressspinner";
 import "./App.css";
+import CookieConsent from "react-cookie-consent";
 const Login = lazy(() => import("./Pages/Login"));
 const ForgotPassword = lazy(() => import("./Pages/ForgotPassword"));
 const ResetPassword = lazy(() => import("./Pages/ResetPassword"));
@@ -70,6 +71,15 @@ export default function App() {
             </div>
           }
         >
+        <CookieConsent
+        location="bottom"
+        buttonText="Accept"
+        declineButtonText="Decline"
+        enableDeclineButton
+
+        onAccept={() => document.cookie="userConsent=true;path=/"}>
+          This website uses cookies to enhance the user experience.{" "}
+        </CookieConsent>
           <Routes>
             <Route path="/" element={<Login toast={toast} />} />
             <Route
