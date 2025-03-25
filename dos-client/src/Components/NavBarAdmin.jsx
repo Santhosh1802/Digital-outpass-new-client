@@ -9,12 +9,13 @@ export default function NavBarAdmin() {
   const dispatch = useDispatch();
   const handleLogout = async () => {
     persistor.purge().then(() => {
-      dispatch({ type: "user/logout" });
-      navigate("/");
+      dispatch({ type: "user/logout" })
     });
     await axios.delete(process.env.REACT_APP_SESSION_LOGOUT, {
       withCredentials: true,
-    });
+    }).then(()=>{
+      navigate("/");
+    })
   };
   const items = [
     {
